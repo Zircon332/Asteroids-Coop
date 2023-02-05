@@ -39,11 +39,14 @@ func hurt() -> void:
 func shoot() -> void:
 	var projectile: Projectile = ProjectileScene.instance()
 	context.add_child(projectile)
+	
+	var dot = velocity.normalized().dot(Vector2.RIGHT.rotated(global_rotation))
+	var weight := max(dot, 0.0)
 	projectile.setup({
 		"position": _tip.global_position,
 		"rotation": global_rotation,
 		"target_layer": Enums.PhysicsLayer.SAUCER,
-		"speed": velocity.length(),
+		"speed": velocity.length() * weight,
 	})
 	
 
