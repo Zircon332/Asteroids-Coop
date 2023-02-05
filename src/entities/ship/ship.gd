@@ -1,5 +1,8 @@
 extends KinematicBody2D
+class_name Ship
 
+
+const ProjectileScene := preload("res://entities/projectile/projectile.tscn")
 
 export(int) var max_speed := 300
 export(int) var acceleration := 300
@@ -10,6 +13,8 @@ var velocity := Vector2()
 var rotation_dir := 0
 
 var _is_thrusting := false
+
+onready var context := get_parent()
 
 
 func _physics_process(delta: float) -> void:
@@ -25,6 +30,12 @@ func hurt() -> void:
 	queue_free()
 
 
+func shoot() -> void:
+	var projectile: Projectile = ProjectileScene.instance()
+	context.add_child(projectile)
+	projectile.setup(global_position, global_rotation, Enums.PhysicsLayer.SAUCER)
+
+
 func _get_input() -> void:
 	rotation_dir = 0
 	
@@ -32,6 +43,9 @@ func _get_input() -> void:
 		rotation_dir += 1
 	if Input.is_action_pressed("rotate_left"):
 		rotation_dir -= 1
+		
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
 	
 	_is_thrusting = Input.is_action_pressed("thrust")
 
