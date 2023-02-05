@@ -13,6 +13,8 @@ export(float) var bullet_cooldown := 1.0
 
 var velocity := Vector2()
 var rotation_dir := 0
+var is_dead := false
+var player_id = 0
 
 var _is_thrusting := false
 
@@ -53,18 +55,22 @@ func shoot() -> void:
 func _get_input() -> void:
 	rotation_dir = 0
 	
-	if Input.is_action_pressed("rotate_right"):
+	if Input.is_action_pressed("rotate_right_" + str(player_id)):
 		rotation_dir += 1
-	if Input.is_action_pressed("rotate_left"):
+	if Input.is_action_pressed("rotate_left_" + str(player_id)):
 		rotation_dir -= 1
 		
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot_" + str(player_id)):
 		if bullet_count > 0:
 			shoot()
 			bullet_count -= 1
 			_create_bullet_cooldown_timer()
 	
-	_is_thrusting = Input.is_action_pressed("thrust")
+	_is_thrusting = Input.is_action_pressed("thrust_" + str(player_id))
+
+
+func set_player_id(id):
+	player_id = id
 
 
 func _calculate_velocity(delta: float) -> void:
