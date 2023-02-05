@@ -94,3 +94,8 @@ func _on_BulletCooldownTimer_timeout() -> void:
 
 func _on_VisibilityNotifier2D_viewport_exited(viewport: Viewport):
 	_screen_wrapper.wrap(self, viewport)
+
+
+func _on_ReviveArea_body_entered(body):
+	if body.is_in_group("players") and body != self:
+		is_dead = false

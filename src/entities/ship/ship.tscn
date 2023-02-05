@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://entities/ship/ship.gd" type="Script" id=1]
 [ext_resource path="res://shared/screen_wrapper/screen_wrapper.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.5, 4 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 25.2389
 
 [node name="Ship" type="KinematicBody2D" groups=["players"]]
 collision_mask = 0
@@ -26,4 +29,10 @@ position = Vector2( 16, 0 )
 [node name="ScreenWrapper" type="Node" parent="."]
 script = ExtResource( 2 )
 
+[node name="ReviveArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReviveArea"]
+shape = SubResource( 2 )
+
 [connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="body_entered" from="ReviveArea" to="." method="_on_ReviveArea_body_entered"]
