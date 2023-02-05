@@ -39,7 +39,7 @@ func start_game() -> void:
 	spawn_players()
 
 
-func spawn_players():
+func spawn_players() -> void:
 	for i in range(player_count):
 		var ship = shipScene.instance()
 		ship.global_position = get_viewport_rect().size / 2
@@ -47,14 +47,21 @@ func spawn_players():
 		add_child(ship)
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	if game_state == 1:
-		var players = get_tree().get_nodes_in_group("players")
-		if players.size() == 0:
-				game_state = GAME_STATES.values().find("end")
-				end_screen.visible = true
+		if _is_all_players_dead():
+			game_state = GAME_STATES.values().find("end")
+			end_screen.visible = true
 		
 		var asteroids = get_tree().get_nodes_in_group("asteroids")
 		if asteroids.size() == 0:
 				spawner.spawn_pack()
 
+
+func _is_all_players_dead() -> bool:
+	var players = get_tree().get_nodes_in_group("players")
+	var is_all_dead = true
+	for p in players:
+		is_all_dead = is_all_dead && p.is_dead
+	
+	return is_all_dead
