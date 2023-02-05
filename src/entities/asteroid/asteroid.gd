@@ -1,6 +1,8 @@
 extends Area2D
 
 
+signal destroyed(size)
+
 export(int) var speed := 100
 export(float) var spread := 30
 
@@ -15,6 +17,9 @@ onready var _screen_wrapper := $ScreenWrapper
 
 
 func _ready():
+	if context.has_method("_on_Asteroid_destroyed"):
+		connect("destroyed", context, "_on_Asteroid_destroyed")
+	
 	_model.scale = Vector2(size, size)
 	_collision_shape.shape.radius = _collision_shape.shape.radius * size
 
@@ -45,7 +50,8 @@ func hurt() -> void:
 			child.size = size - 1
 			
 			context.call_deferred("add_child", child)
-			
+	
+	emit_signal("destroyed", size)
 	queue_free()
 
 

@@ -58,3 +58,6 @@ func _physics_process(delta):
 		if asteroids.size() == 0:
 				spawner.spawn_pack()
 
+
+func _on_Asteroid_destroyed(size: int):
+	points += size * -20 + 80
