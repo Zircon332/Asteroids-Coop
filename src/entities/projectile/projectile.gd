@@ -23,11 +23,19 @@ func _physics_process(delta: float) -> void:
 	position += Vector2(speed * delta, 0.0).rotated(rotation)
 
 
-func _on_Projectile_body_entered(body: KinematicBody2D):
-	if body.has_method("hurt"):
-		body.hurt()
+func _hit(node: Node) -> void:
+	if node.has_method("hurt"):
+		node.hurt()
 	
 	queue_free()
+
+
+func _on_Projectile_body_entered(body: KinematicBody2D):
+	_hit(body)
+
+
+func _on_Projectile_area_entered(area: Area2D):
+	_hit(area)
 
 
 func _on_DespawnTimer_timeout():
