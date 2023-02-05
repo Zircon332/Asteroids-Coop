@@ -4,11 +4,16 @@ class_name Projectile
 
 export(int) var speed := 300
 
-
-func setup(pos: Vector2, rot: float, target_layer: int) -> void:
-	global_position = pos
-	global_rotation = rot
-	set_collision_mask_bit(target_layer, true)
+# Params:
+# - position: Vector2 | Initial position
+# - rotation: float | Facing direction
+# - speed: int | Additional addon speed
+# - target_layer: int | Collision layer bit for entity that will be hit
+func setup(params: Dictionary) -> void:
+	global_position = params["position"]
+	global_rotation = params["rotation"]
+	speed += params["speed"]
+	set_collision_mask_bit(params["target_layer"], true)
 
 
 func _physics_process(delta: float) -> void:
@@ -20,4 +25,7 @@ func _on_Projectile_body_entered(body: KinematicBody2D):
 		body.hurt()
 	
 	queue_free()
-		
+
+
+func _on_DespawnTimer_timeout():
+	queue_free()
