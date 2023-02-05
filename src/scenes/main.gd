@@ -65,3 +65,8 @@ func _is_all_players_dead() -> bool:
 		is_all_dead = is_all_dead && p.is_dead
 	
 	return is_all_dead
+
+
+func add_point(point):
+	points += point
+	hud.display_point(points)
