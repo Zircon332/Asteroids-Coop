@@ -4,9 +4,9 @@
 [ext_resource path="res://shared/screen_wrapper/screen_wrapper.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
+resource_local_to_scene = true
 
 [node name="Asteroid" type="KinematicBody2D"]
-position = Vector2( 511, 292 )
 collision_layer = 2
 collision_mask = 0
 script = ExtResource( 1 )

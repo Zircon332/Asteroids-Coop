@@ -21,6 +21,7 @@ func spawn(pos: Vector2) -> void:
 	var asteroid := asteroidScene.instance()
 	asteroid.global_position = pos
 	context.add_child(asteroid)
+	asteroid.spawn()
 
 
 func _offset_position(pos: Vector2) -> Vector2:
