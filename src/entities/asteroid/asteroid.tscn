@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://entities/asteroid/asteroid.gd" type="Script" id=1]
+[ext_resource path="res://shared/screen_wrapper/screen_wrapper.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -15,3 +16,10 @@ shape = SubResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PoolVector2Array( -5, -8, -8, -4, -6, 0, -8, 4, -5, 8, -1, 7, 6, 8, 9, 0, 5, -2, 8, -5, 4, -8, 0, -7 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="ScreenWrapper" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

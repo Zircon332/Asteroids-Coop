@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://entities/projectile/projectile.gd" type="Script" id=1]
+[ext_resource path="res://shared/screen_wrapper/screen_wrapper.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 0.5 )
@@ -25,5 +26,11 @@ shape = SubResource( 1 )
 one_shot = true
 autostart = true
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="ScreenWrapper" type="Node" parent="."]
+script = ExtResource( 2 )
+
 [connection signal="body_entered" from="." to="." method="_on_Projectile_body_entered"]
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_DespawnTimer_timeout"]
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

@@ -5,7 +5,10 @@ var direction := Vector2.UP
 export var speed := 50
 var size := 2
 
-func _ready() -> void:
+onready var _screen_wrapper := $ScreenWrapper
+
+
+func _ready():
 	spawn()
 
 
@@ -21,6 +24,10 @@ func spawn() -> void:
 
 func _physics_process(delta) -> void:
 	position += delta * speed * direction
+
+
+func _on_VisibilityNotifier2D_viewport_exited(viewport):
+	_screen_wrapper.wrap(self, viewport)
 
 
 func hurt() -> void:

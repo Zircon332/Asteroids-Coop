@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://entities/ship/ship.gd" type="Script" id=1]
+[ext_resource path="res://shared/screen_wrapper/screen_wrapper.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.5, 4 )
@@ -19,3 +20,10 @@ polygon = PoolVector2Array( -16, -8, 16, 0, -16, 8, -8, 0 )
 
 [node name="Tip" type="Position2D" parent="."]
 position = Vector2( 16, 0 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="ScreenWrapper" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
