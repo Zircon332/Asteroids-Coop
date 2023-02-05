@@ -58,6 +58,10 @@ func _physics_process(delta) -> void:
 				spawner.spawn_pack()
 
 
+func _on_Asteroid_destroyed(size: int):
+	add_point(size * -20 + 80)
+
+
 func _is_all_players_dead() -> bool:
 	var players = get_tree().get_nodes_in_group("players")
 	var is_all_dead = true
