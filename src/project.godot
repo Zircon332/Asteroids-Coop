@@ -14,9 +14,17 @@ config/name="Asteroids Coop"
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/segmented_progress/plugin.cfg" )
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[mono]
+
+project/assembly_name="Asteroids Coop"
 
 [physics]
 
