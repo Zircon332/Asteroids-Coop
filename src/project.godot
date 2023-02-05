@@ -44,7 +44,7 @@ config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/segmented_progress/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [gui]
 

@@ -53,4 +53,8 @@ func _physics_process(delta):
 		if players.size() == 0:
 				game_state = GAME_STATES.values().find("end")
 				end_screen.visible = true
+		
+		var asteroids = get_tree().get_nodes_in_group("asteroids")
+		if asteroids.size() == 0:
+				spawner.spawn_pack()
 
