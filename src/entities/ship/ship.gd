@@ -35,8 +35,12 @@ func hurt() -> void:
 func shoot() -> void:
 	var projectile: Projectile = ProjectileScene.instance()
 	context.add_child(projectile)
-	projectile.setup(_tip.global_position, global_rotation, Enums.PhysicsLayer.SAUCER)
-
+	projectile.setup({
+		"position": _tip.global_position,
+		"rotation": global_rotation,
+		"target_layer": Enums.PhysicsLayer.SAUCER,
+		"speed": velocity.length(),
+	})
 
 func _get_input() -> void:
 	rotation_dir = 0
