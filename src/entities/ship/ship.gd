@@ -8,6 +8,8 @@ export(int) var max_speed := 300
 export(int) var acceleration := 300
 export(float) var friction := 0.001
 export(float) var rotation_speed := 3.0
+export(int) var max_bullet_count := 4
+export(float) var bullet_cooldown := 1.0
 
 var velocity := Vector2()
 var rotation_dir := 0
@@ -15,6 +17,7 @@ var rotation_dir := 0
 var _is_thrusting := false
 
 onready var context := get_parent()
+onready var bullet_count := max_bullet_count
 
 onready var _tip := $Tip
 
@@ -41,6 +44,7 @@ func shoot() -> void:
 		"target_layer": Enums.PhysicsLayer.SAUCER,
 		"speed": velocity.length(),
 	})
+	
 
 func _get_input() -> void:
 	rotation_dir = 0
@@ -51,7 +55,10 @@ func _get_input() -> void:
 		rotation_dir -= 1
 		
 	if Input.is_action_just_pressed("shoot"):
-		shoot()
+		if bullet_count > 0:
+			shoot()
+			bullet_count -= 1
+			_create_bullet_cooldown_timer()
 	
 	_is_thrusting = Input.is_action_pressed("thrust")
 
@@ -63,3 +70,12 @@ func _calculate_velocity(delta: float) -> void:
 		velocity = lerp(velocity, Vector2.ZERO, friction)
 	
 	velocity = velocity.limit_length(max_speed)
+
+
+func _create_bullet_cooldown_timer() -> void:
+	var timer = get_tree().create_timer(bullet_cooldown)
+	timer.connect("timeout", self, "_on_BulletCooldownTimer_timeout")
+
+
+func _on_BulletCooldownTimer_timeout() -> void:
+	bullet_count += 1
