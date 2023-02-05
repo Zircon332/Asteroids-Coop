@@ -20,4 +20,7 @@ func _on_Projectile_body_entered(body: KinematicBody2D):
 		body.hurt()
 	
 	queue_free()
-		
+
+
+func _on_DespawnTimer_timeout():
+	queue_free()
