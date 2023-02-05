@@ -13,7 +13,7 @@ var _is_thrusting := false
 
 
 func _physics_process(delta: float) -> void:
-	get_input()
+	_get_input()
 	
 	rotation += rotation_dir * rotation_speed * delta
 	_calculate_velocity(delta)
@@ -21,7 +21,11 @@ func _physics_process(delta: float) -> void:
 	velocity = move_and_slide(velocity)
 
 
-func get_input() -> void:
+func hurt() -> void:
+	queue_free()
+
+
+func _get_input() -> void:
 	rotation_dir = 0
 	
 	if Input.is_action_pressed("rotate_right"):
