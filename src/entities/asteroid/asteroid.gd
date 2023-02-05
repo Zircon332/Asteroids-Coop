@@ -51,3 +51,10 @@ func hurt() -> void:
 
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
 	_screen_wrapper.wrap(self, viewport)
+
+
+func _on_Asteroid_body_entered(body: KinematicBody2D):
+	if body.has_method("hurt"):
+		body.hurt()
+	
+	hurt()
