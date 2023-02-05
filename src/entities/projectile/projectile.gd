@@ -24,6 +24,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _hit(node: Node) -> void:
+	if is_queued_for_deletion():
+		return
+	
 	if node.has_method("hurt"):
 		node.hurt()
 	
