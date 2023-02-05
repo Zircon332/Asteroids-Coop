@@ -16,17 +16,19 @@ var game_state := 0
 var points := 0
 
 
-func _ready():
+func _ready() -> void:
 	pass # Replace with function body.
 
 
-func _input(event):
+func _input(event) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		spawner.spawn_pack()
 	if game_state == 0:
 		if Input.is_action_just_pressed("ui_accept"):
 			start_game()
 
 
-func start_game():
+func start_game() -> void:
 	start_screen.visible = false
 	game_state = GAME_STATES.values().find("play")
 	spawner.spawn_pack()

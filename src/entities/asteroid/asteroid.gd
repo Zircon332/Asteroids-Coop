@@ -1,20 +1,26 @@
 extends KinematicBody2D
 
 
-var dir := Vector2.ZERO
-export var speed := 100
-
+var direction := Vector2.UP
+export var speed := 50
+var size := 2
 
 func _ready() -> void:
 	spawn()
 
 
 func spawn() -> void:
-	dir = Vector2(randf(), randf())
+	var center_offset = 50
+	var target = Vector2(
+		rand_range(center_offset, get_viewport_rect().size.x - center_offset),
+		rand_range(center_offset, get_viewport_rect().size.y - center_offset)
+	)
+	
+	direction = position.direction_to(target)
 
 
 func _physics_process(delta) -> void:
-	position += delta * speed * dir
+	position += delta * speed * direction
 
 
 func hurt() -> void:

@@ -10,7 +10,7 @@ onready var _spawn_point := $SpawnPoint
 
 
 func spawn_pack() -> void:
-	var pack_size := 10
+	var pack_size := 1
 	
 	for _i in range(pack_size):
 		_spawn_point.unit_offset = _rng.randf()
@@ -18,14 +18,13 @@ func spawn_pack() -> void:
 
 
 func spawn(pos: Vector2) -> void:
-	var npc := asteroidScene.instance()
-	npc.global_position = pos
-	context.add_child(npc)
+	var asteroid := asteroidScene.instance()
+	asteroid.global_position = pos
+	context.add_child(asteroid)
 
 
 func _offset_position(pos: Vector2) -> Vector2:
 	var angle := _rng.randf_range(-PI, PI)
 	var direction := Vector2.RIGHT.rotated(angle)
 	var vector := direction * randf()
-	print(pos + vector)
 	return pos + vector
