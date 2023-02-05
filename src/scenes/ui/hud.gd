@@ -1,8 +1,7 @@
 extends Control
 
 
-onready var _score := $MarginContainer/Score
+onready var score_display = $MarginContainer/Score
 
-
-func set_score(val: int) -> void:
-	_score.text = str(val)
+func display_point(points):
+	score_display.text = str(points)
