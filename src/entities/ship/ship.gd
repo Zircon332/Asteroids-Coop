@@ -26,7 +26,8 @@ onready var _screen_wrapper := $ScreenWrapper
 
 
 func _physics_process(delta: float) -> void:
-	_get_input()
+	if not is_dead:
+		_get_input()
 	
 	rotation += rotation_dir * rotation_speed * delta
 	_calculate_velocity(delta)
@@ -35,7 +36,7 @@ func _physics_process(delta: float) -> void:
 
 
 func hurt() -> void:
-	queue_free()
+	is_dead = true
 
 
 func shoot() -> void:
@@ -69,7 +70,7 @@ func _get_input() -> void:
 	_is_thrusting = Input.is_action_pressed("thrust_" + str(player_id))
 
 
-func set_player_id(id):
+func set_player_id(id) -> void:
 	player_id = id
 
 
