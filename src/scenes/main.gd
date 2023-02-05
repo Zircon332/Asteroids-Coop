@@ -61,3 +61,4 @@ func _physics_process(delta):
 
 func _on_Asteroid_destroyed(size: int):
 	points += size * -20 + 80
+	hud.set_score(points)
