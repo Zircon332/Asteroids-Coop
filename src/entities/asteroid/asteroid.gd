@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 var direction := Vector2.UP
-export var speed := 50
+export var speed := 100
 var size := 2
 
 onready var _screen_wrapper := $ScreenWrapper

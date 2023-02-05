@@ -21,8 +21,6 @@ func _ready() -> void:
 
 
 func _input(event) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		spawner.spawn_pack()
 	if game_state == 0:
 		if Input.is_action_just_pressed("ui_accept"):
 			start_game()

@@ -10,7 +10,7 @@ onready var _spawn_point := $SpawnPoint
 
 
 func spawn_pack() -> void:
-	var pack_size := 1
+	var pack_size := 4
 	
 	for _i in range(pack_size):
 		_spawn_point.unit_offset = _rng.randf()
