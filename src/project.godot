@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/projectile/projectile.gd"
 }, {
+"base": "Node",
+"class": "ScreenWrapper",
+"language": "GDScript",
+"path": "res://shared/screen_wrapper/screen_wrapper.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Ship",
 "language": "GDScript",
@@ -27,6 +32,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Enums": "",
 "Projectile": "",
+"ScreenWrapper": "",
 "Ship": ""
 }
 

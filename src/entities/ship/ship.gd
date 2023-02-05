@@ -20,6 +20,7 @@ onready var context := get_parent()
 onready var bullet_count := max_bullet_count
 
 onready var _tip := $Tip
+onready var _screen_wrapper := $ScreenWrapper
 
 
 func _physics_process(delta: float) -> void:
@@ -79,3 +80,7 @@ func _create_bullet_cooldown_timer() -> void:
 
 func _on_BulletCooldownTimer_timeout() -> void:
 	bullet_count += 1
+
+
+func _on_VisibilityNotifier2D_viewport_exited(viewport: Viewport):
+	_screen_wrapper.wrap(self, viewport)
