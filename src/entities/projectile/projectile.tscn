@@ -4,10 +4,9 @@
 [ext_resource path="res://shared/screen_wrapper/screen_wrapper.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 0.5 )
+extents = Vector2( 9, 1 )
 
 [node name="Projectile" type="Area2D"]
-position = Vector2( 62, 46 )
 collision_layer = 0
 collision_mask = 2
 monitorable = false
@@ -15,8 +14,8 @@ script = ExtResource( 1 )
 
 [node name="Line2D" type="Line2D" parent="."]
 position = Vector2( 4, 0 )
-points = PoolVector2Array( -8, 0, 0, 0 )
-width = 1.0
+points = PoolVector2Array( -13, 0, 5, 0 )
+width = 2.0
 default_color = Color( 1, 1, 1, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
