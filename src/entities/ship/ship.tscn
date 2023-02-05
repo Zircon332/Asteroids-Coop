@@ -16,3 +16,6 @@ shape = SubResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PoolVector2Array( -16, -8, 16, 0, -16, 8, -8, 0 )
+
+[node name="Tip" type="Position2D" parent="."]
+position = Vector2( 16, 0 )

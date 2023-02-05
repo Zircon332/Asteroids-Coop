@@ -16,6 +16,8 @@ var _is_thrusting := false
 
 onready var context := get_parent()
 
+onready var _tip := $Tip
+
 
 func _physics_process(delta: float) -> void:
 	_get_input()
@@ -33,7 +35,7 @@ func hurt() -> void:
 func shoot() -> void:
 	var projectile: Projectile = ProjectileScene.instance()
 	context.add_child(projectile)
-	projectile.setup(global_position, global_rotation, Enums.PhysicsLayer.SAUCER)
+	projectile.setup(_tip.global_position, global_rotation, Enums.PhysicsLayer.SAUCER)
 
 
 func _get_input() -> void:
