@@ -1,11 +1,7 @@
 extends Node2D
 
 
-const GAME_STATES := {
-	0: "start",
-	1: "play",
-	2: "end",
-}
+enum GAME_STATES {START, PLAY, END}
 
 const shipScene := preload("res://entities/ship/ship.tscn")
 
@@ -26,7 +22,7 @@ func _input(event) -> void:
 		for p in players:
 			p.hurt()
 
-	if game_state != 1:
+	if game_state != GAME_STATES.PLAY:
 		if Input.is_action_just_pressed("ui_accept"):
 			start_game()
 
@@ -34,7 +30,7 @@ func _input(event) -> void:
 func start_game() -> void:
 	start_screen.visible = false
 	end_screen.visible = false
-	game_state = GAME_STATES.values().find("play")
+	game_state = GAME_STATES.PLAY
 	spawner.spawn_pack()
 	spawn_players()
 
@@ -48,9 +44,9 @@ func spawn_players() -> void:
 
 
 func _physics_process(delta) -> void:
-	if game_state == 1:
+	if game_state == GAME_STATES.PLAY:
 		if _is_all_players_dead():
-			game_state = GAME_STATES.values().find("end")
+			game_state = GAME_STATES.END
 			end_screen.visible = true
 		
 		var asteroids = get_tree().get_nodes_in_group("asteroids")
