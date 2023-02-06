@@ -74,7 +74,7 @@ func toggle_player_two():
 func spawn_players() -> void:
 	for i in range(player_count):
 		var ship = shipScene.instance()
-		ship.global_position = get_viewport_rect().size / 2
+		ship.global_position = get_viewport_rect().size / 2 + Vector2.RIGHT * i * 50
 		ship.set_player_id(i + 1)
 		add_child(ship)
 

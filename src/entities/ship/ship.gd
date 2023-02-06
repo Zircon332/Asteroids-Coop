@@ -6,8 +6,8 @@ const ProjectileScene := preload("res://entities/projectile/projectile.tscn")
 
 export(int) var max_speed := 300
 export(int) var acceleration := 300
-export(float) var friction := 0.001
-export(float) var rotation_speed := 3.0
+export(float) var friction := 0.01
+export(float) var rotation_speed := 3.5
 export(int) var max_bullet_count := 4
 export(float) var bullet_cooldown := 1.0
 
@@ -26,6 +26,8 @@ onready var _screen_wrapper := $ScreenWrapper
 
 
 func _physics_process(delta: float) -> void:
+	_is_thrusting = false
+	
 	if not is_dead:
 		_get_input()
 	
