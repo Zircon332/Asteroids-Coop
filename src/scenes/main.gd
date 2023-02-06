@@ -14,6 +14,7 @@ export(int) var player_count := 2
 
 var game_state := 0
 var points := 0
+var wave := 0
 
 
 func _input(event) -> void:
@@ -51,7 +52,8 @@ func _physics_process(delta) -> void:
 		
 		var asteroids = get_tree().get_nodes_in_group("asteroids")
 		if asteroids.size() == 0:
-				spawner.spawn_pack()
+				wave += 1
+				spawner.spawn_pack(wave + 4)
 
 
 func _on_Asteroid_destroyed(size: int):

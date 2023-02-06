@@ -9,9 +9,7 @@ onready var _rng := RandomNumberGenerator.new()
 onready var _spawn_point := $SpawnPoint
 
 
-func spawn_pack() -> void:
-	var pack_size := 4
-	
+func spawn_pack(pack_size:int = 4) -> void:
 	for _i in range(pack_size):
 		_spawn_point.unit_offset = _rng.randf()
 		spawn(_offset_position(_spawn_point.global_position))
