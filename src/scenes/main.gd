@@ -18,14 +18,20 @@ var wave := 0
 
 
 func _input(event) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
-		var players = get_tree().get_nodes_in_group("players")
-		for p in players:
-			p.hurt()
-
-	if game_state != GAME_STATES.PLAY:
-		if Input.is_action_just_pressed("ui_accept"):
-			start_game()
+	match game_state:
+		GAME_STATES.START:
+			if Input.is_action_just_pressed("ui_accept"):
+				start_game()
+		
+		GAME_STATES.PLAY:
+			if Input.is_action_just_pressed("ui_cancel"):
+				var players = get_tree().get_nodes_in_group("players")
+				for p in players:
+					p.hurt()
+		
+		GAME_STATES.END:
+			if Input.is_action_just_pressed("ui_accept"):
+				reset_game()
 
 
 func start_game() -> void:
@@ -34,6 +40,24 @@ func start_game() -> void:
 	game_state = GAME_STATES.PLAY
 	spawner.spawn_pack()
 	spawn_players()
+
+
+func reset_game() -> void:
+	game_state = GAME_STATES.START
+	points = 0
+	wave = 0
+	
+	var players = get_tree().get_nodes_in_group("players")
+	for p in players:
+		p.queue_free()
+	
+	var asteroids = get_tree().get_nodes_in_group("asteroids")
+	for a in asteroids:
+		a.queue_free()
+	
+	start_screen.visible = true
+	end_screen.visible = false
+	hud.display_point(0)
 
 
 func spawn_players() -> void:
