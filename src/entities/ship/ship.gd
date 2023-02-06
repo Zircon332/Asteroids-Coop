@@ -37,6 +37,7 @@ func _physics_process(delta: float) -> void:
 
 func hurt() -> void:
 	is_dead = true
+	set_collision_layer_bit(0, 0)
 
 
 func shoot() -> void:
@@ -99,3 +100,4 @@ func _on_VisibilityNotifier2D_viewport_exited(viewport: Viewport):
 func _on_ReviveArea_body_entered(body):
 	if body.is_in_group("players") and body != self:
 		is_dead = false
+		set_collision_layer_bit(0, 1)
