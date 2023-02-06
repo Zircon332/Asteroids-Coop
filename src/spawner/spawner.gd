@@ -3,9 +3,9 @@ extends Path2D
 
 const asteroidScene := preload("res://entities/asteroid/asteroid.tscn")
 
-onready var context := get_parent() 
-onready var _rng := RandomNumberGenerator.new()
+onready var context := get_parent()
 
+onready var _rng := RandomNumberGenerator.new()
 onready var _spawn_point := $SpawnPoint
 
 

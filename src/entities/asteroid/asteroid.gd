@@ -16,7 +16,7 @@ onready var _collision_shape := $CollisionShape2D
 onready var _screen_wrapper := $ScreenWrapper
 
 
-func _ready():
+func _ready() -> void:
 	if context.has_method("_on_Asteroid_destroyed"):
 		connect("destroyed", context, "_on_Asteroid_destroyed")
 	
@@ -55,11 +55,11 @@ func hurt() -> void:
 	queue_free()
 
 
-func _on_VisibilityNotifier2D_viewport_exited(viewport):
+func _on_VisibilityNotifier2D_viewport_exited(viewport) -> void:
 	_screen_wrapper.wrap(self, viewport)
 
 
-func _on_Asteroid_body_entered(body: KinematicBody2D):
+func _on_Asteroid_body_entered(body: KinematicBody2D) -> void:
 	if body.has_method("hurt"):
 		body.hurt()
 	

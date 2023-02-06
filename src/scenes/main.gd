@@ -62,7 +62,7 @@ func reset_game() -> void:
 	hud.display_point(0)
 
 
-func toggle_player_two():
+func toggle_player_two() -> void:
 	if player_count == 1:
 		player_count = 2
 	else:
@@ -91,7 +91,7 @@ func _physics_process(delta) -> void:
 				spawner.spawn_pack(wave + 4)
 
 
-func _on_Asteroid_destroyed(size: int):
+func _on_Asteroid_destroyed(size: int) -> void:
 	add_point(size * -20 + 80)
 
 
@@ -104,6 +104,6 @@ func _is_all_players_dead() -> bool:
 	return is_all_dead
 
 
-func add_point(point):
+func add_point(point) -> void:
 	points += point
 	hud.display_point(points)

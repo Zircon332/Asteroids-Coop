@@ -11,10 +11,10 @@ export(float) var rotation_speed := 3.5
 export(int) var max_bullet_count := 4
 export(float) var bullet_cooldown := 1.0
 
+var player_id = 0
 var velocity := Vector2()
 var rotation_dir := 0
 var is_dead := false
-var player_id = 0
 
 var _is_thrusting := false
 
@@ -54,7 +54,7 @@ func shoot() -> void:
 		"target_layer": Enums.PhysicsLayer.SAUCER,
 		"speed": velocity.length() * weight,
 	})
-	
+
 
 func _get_input() -> void:
 	rotation_dir = 0
