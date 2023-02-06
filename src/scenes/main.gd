@@ -10,8 +10,7 @@ onready var start_screen := $CanvasLayer/StartScreen
 onready var end_screen := $CanvasLayer/EndScreen
 onready var spawner := $Spawner
 
-export(int) var player_count := 2
-
+var player_count := 1
 var game_state := 0
 var points := 0
 var wave := 0
@@ -22,6 +21,9 @@ func _input(event) -> void:
 		GAME_STATES.START:
 			if Input.is_action_just_pressed("ui_accept"):
 				start_game()
+				
+			if Input.is_action_just_pressed("shoot_2"):
+				toggle_player_two()
 		
 		GAME_STATES.PLAY:
 			if Input.is_action_just_pressed("ui_cancel"):
@@ -58,6 +60,15 @@ func reset_game() -> void:
 	start_screen.visible = true
 	end_screen.visible = false
 	hud.display_point(0)
+
+
+func toggle_player_two():
+	if player_count == 1:
+		player_count = 2
+	else:
+		player_count = 1
+	
+	start_screen.set_coins(player_count)
 
 
 func spawn_players() -> void:
